@@ -1,0 +1,36 @@
+# Zig build artifacts
+.zig-cache/
+zig-out/
+build/
+build-*/
+
+# Dependencies
+deps/
+
+# IDE specific files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*~
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Debug files
+*.pdb
+*.dSYM/
+
+# Environment variables
+.env
+.env.local
+.env.*
+
+# Logs
+*.log
+logs/
+npm-debug.log*

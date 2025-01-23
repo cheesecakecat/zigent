@@ -23,7 +23,7 @@
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": "active",
     "editor.guides.indentation": true,
-    "editor.fontSize": 18,
+    "editor.fontSize": 16,
     "editor.fontFamily": "JetBrains Mono, Consolas, 'Courier New', monospace",
     "editor.fontLigatures": true,
     "editor.lineHeight": 1.5,

@@ -30,7 +30,7 @@ pub const Config = struct {
     /// to avoid frequent resizing. The memory is allocated immediately, so don't go overboard.
     ///
     /// Memory Impact: Each index typically uses 4-8 bytes depending on configuration. A capacity
-    /// of 1024 uses about 4-8KB of memory. For games with very tight memory constraints, start
+    /// of 1024 uses about 4-8KB of memory. For cases with very tight memory constraints, start
     /// smaller and let it grow as needed.
     initial_capacity: IndexType = 1024,
 
@@ -59,7 +59,7 @@ pub const Config = struct {
     growth_factor: f32 = 2.0,
 
     /// When the pool is this empty, it will shrink to free unused memory. Set to 0 to never shrink.
-    /// This helps prevent memory bloat in games where entity count fluctuates significantly.
+    /// This helps prevent memory bloat in cases where entity count fluctuates significantly.
     ///
     /// Performance Note: Shrinking copies all existing indices to a new, smaller allocation. If your
     /// entity count oscillates frequently around the threshold, you might see performance spikes
@@ -178,7 +178,7 @@ pub const Error = error{
 };
 
 /// Function type for handling pool events. Implement this to hook into pool operations
-/// for logging, debugging, or game logic.
+/// for logging, debugging, or logic.
 ///
 /// Warning: Event handlers run synchronously in the same thread as the pool operation.
 /// Keep them fast to avoid performance issues.
@@ -187,7 +187,7 @@ pub const Error = error{
 /// the event data for processing in a separate thread or during the next update cycle.
 pub const EventHandler = *const fn (event: Event) void;
 
-/// A balanced configuration that works well for most games. Provides safety and decent
+/// A balanced configuration that works well for most cases. Provides safety and decent
 /// performance without excessive memory usage.
 ///
 /// Start with this configuration and only customize options if profiling shows

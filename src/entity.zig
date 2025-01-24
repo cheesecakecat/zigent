@@ -35,7 +35,6 @@ const math = std.math;
 /// is reserved for null entities, providing a guaranteed invalid index range.
 /// Always validate entities through isNull() before use.
 ///
-/// Common Pitfalls:
 /// Avoid direct struct initialization - always use provided functions.
 /// Never assume consecutive indices represent valid entity ranges.
 /// Remember that a matching index doesn't guarantee entity validity.

@@ -126,7 +126,7 @@ pub const Entity = extern struct {
     /// Creates an entity from explicit index and generation values. This is a low-level
     /// function that bypasses normal entity creation flow and should be used with caution.
     /// The provided index must be less than max_index.
-    pub inline fn fromParts(idx: index.IndexType, gen: generation.GenerationType) Self {
+    pub inline fn construct(idx: index.IndexType, gen: generation.GenerationType) Self {
         @setRuntimeSafety(false);
         assert(idx < max_index);
         return .{
@@ -138,7 +138,7 @@ pub const Entity = extern struct {
     /// Decomposes an entity into its constituent parts. This is primarily useful
     /// for serialization or integration with external systems that need direct
     /// access to the index and generation values.
-    pub inline fn toParts(self: Self) struct { index: index.IndexType, generation: generation.GenerationType } {
+    pub inline fn deconstruct(self: Self) struct { index: index.IndexType, generation: generation.GenerationType } {
         @setRuntimeSafety(false);
         return .{
             .index = self.index,
@@ -150,16 +150,16 @@ pub const Entity = extern struct {
 test "entity basic" {
     const testing = std.testing;
 
-    const e1 = Entity.fromParts(1, 1);
-    const e2 = Entity.fromParts(1, 2);
-    const e3 = Entity.fromParts(1, 1);
+    const e1 = Entity.construct(1, 1);
+    const e2 = Entity.construct(1, 2);
+    const e3 = Entity.construct(1, 1);
 
     try testing.expect(e1.eql(e3));
     try testing.expect(!e1.eql(e2));
     try testing.expect(e1.hash() == e3.hash());
     try testing.expect(e1.hash() != e2.hash());
 
-    const parts = e1.toParts();
+    const parts = e1.deconstruct();
     try testing.expectEqual(parts.index, 1);
     try testing.expectEqual(parts.generation, 1);
 }
@@ -168,7 +168,7 @@ test "entity null" {
     const testing = std.testing;
 
     const null_entity = Entity.initNull();
-    const valid_entity = Entity.fromParts(1, 1);
+    const valid_entity = Entity.construct(1, 1);
 
     try testing.expect(null_entity.isNull());
     try testing.expect(!valid_entity.isNull());
@@ -178,7 +178,7 @@ test "entity null" {
 test "entity formatting" {
     const testing = std.testing;
 
-    const e = Entity.fromParts(42, 7);
+    const e = Entity.construct(42, 7);
     const null_e = Entity.initNull();
 
     var buf: [32]u8 = undefined;

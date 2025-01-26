@@ -1,14 +1,24 @@
-//! Zigent Entity-Component-System
-//! Copyright (c) 2024 Zigent Contributors
-//! SPDX-License-Identifier: MIT OR Apache-2.0
-
 const std = @import("std");
 const testing = std.testing;
 
-const generation = @import("entity/generation.zig");
-const index = @import("entity/index.zig");
-const entity = @import("entity.zig");
+/// Core ECS types and functionality
+pub const core = @import("ecs/core.zig");
+pub const world = @import("ecs/world.zig");
+pub const World = world.World;
+
+/// Core types
+pub const Entity = core.Entity;
+pub const EntityId = core.EntityId;
+pub const ComponentId = core.ComponentId;
+pub const ComponentStorage = core.ComponentStorage;
+pub const SparseSet = core.SparseSet;
 
 test {
+    // Test this file's declarations
     testing.refAllDecls(@This());
+
+    // Test all imported modules
+    _ = @import("ecs/core.zig");
+    _ = @import("ecs/world.zig");
+    _ = @import("ecs/tests.zig");
 }
